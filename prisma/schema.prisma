@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Actor {
+  id        Int      @id @default(autoincrement())
+  name      String
+  gender    String
+  dob       DateTime
+  bio       String?
+  movies    MovieActor[]
+}
+
+model Producer {
+  id        Int      @id @default(autoincrement())
+  name      String
+  gender    String
+  dob       DateTime
+  bio       String?
+  movies    Movie[]
+}
+
+model Movie {
+  id           Int          @id @default(autoincrement())
+  name         String
+  yearOfRelease Int
+  plot         String?
+  poster       String?
+  producer     Producer?    @relation(fields: [producerId], references: [id])
+  producerId   Int?
+  actors       MovieActor[]
+}
+
+model MovieActor {
+  id      Int    @id @default(autoincrement())
+  movie   Movie  @relation(fields: [movieId], references: [id])
+  movieId Int
+  actor   Actor  @relation(fields: [actorId], references: [id])
+  actorId Int
+
+  @@unique([movieId, actorId]) // Prevent duplicate entries
+}
