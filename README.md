@@ -1,6 +1,6 @@
-# **Movies Management Backend**
+# **IMDB Backend**
 
-This is the backend for managing movies, producers, and actors. It provides CRUD operations and integrates with a PostgreSQL database.
+This is the backend for managing movies, producers, and actors. It provides CRUD operations, Signin and Signup and integrates with a PostgreSQL database.
 
 ---
 
