@@ -19,6 +19,7 @@ This is the backend for managing movies, producers, and actors. It provides CRUD
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/hemraj-007/IMDB-backend.git
+   cd IMDB-backend
 
 2. **Set up the database**:
    -Create a PostgreSQL database.
